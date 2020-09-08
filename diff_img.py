@@ -42,7 +42,9 @@ def write_diff(before, after):
             cv2.drawContours(mask, [c], 0, (0, 255, 0), -1)
             cv2.drawContours(filled_after, [c], 0, (0, 255, 0), -1)
     diff = np.repeat(diff[:, :, np.newaxis], 3, axis=2)
-    return np.concatenate((im1, im2, diff, filled_after), axis=1), score
+    orig = np.concatenate((im1, im2), axis=1)
+    res = np.concatenate((diff, filled_after), axis=1)
+    return np.concatenate((orig, res), axis=0), score
 
 
 def main():
